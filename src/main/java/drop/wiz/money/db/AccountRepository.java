@@ -1,9 +1,11 @@
 package drop.wiz.money.db;
 
+import drop.wiz.money.api.AccountRequest;
 import drop.wiz.money.core.Account;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AccountRepository extends AbstractDAO<Account> {
@@ -20,7 +22,16 @@ public class AccountRepository extends AbstractDAO<Account> {
         return Optional.ofNullable(get(id));
     }
 
-    public Account create(Account account) {
+    public List<Account> findByUserId(String userId) {
+
+        return list(namedQuery("account.byUserId").setParameter("userId", userId));
+    }
+
+    public Account saveOrUpdate(Account account) {
         return persist(account);
+    }
+
+    public void delete(Long id) {
+        currentSession().delete(findById(id));
     }
 }
