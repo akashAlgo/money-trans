@@ -2,9 +2,9 @@ package drop.wiz.money.resources;
 
 import drop.wiz.money.core.Account;
 import drop.wiz.money.api.AccountRequest;
-import drop.wiz.money.db.AccountRepository;
 import drop.wiz.money.exception.AccountNotFoundException;
 import drop.wiz.money.service.AccountService;
+import io.dropwizard.hibernate.UnitOfWork;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,16 +26,18 @@ public class AccountEndpoint {
     }
 
     @GET
-    @Path("/account/{accountNumber}")
+    @Path("/accounts/{account_number}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Account getAccountsById(@PathParam("accountNumber") Long accountNumber)
+    @UnitOfWork
+    public Account getAccountsById(@PathParam("account_number") Long accountNumber)
     throws AccountNotFoundException {
         return accountService.getAccountById(accountNumber);
     }
 
     @GET
-    @Path("/account")
+    @Path("/accounts")
     @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
     public List<Account> getAccountsForUser(@Context final HttpServletRequest request) {
 
         String userId = request.getHeader(USER);
@@ -43,25 +45,19 @@ public class AccountEndpoint {
     }
 
     @POST
-    @Path("/account")
+    @Path("/accounts")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
     public Account createAccount(AccountRequest accountRequest) {
-        return accountService.saveOrUpdate(accountRequest);
-    }
-
-    @PUT
-    @Path("/account")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Account updateAccount(AccountRequest accountRequest) {
-        return accountService.saveOrUpdate(accountRequest);
+        return accountService.save(accountRequest);
     }
 
     @DELETE
-    @Path("/account")
+    @Path("/accounts/{account_number}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteAccount(Long accountNumber, @Context final HttpServletRequest request) {
+    @UnitOfWork
+    public void deleteAccount(@PathParam("account_number") Long accountNumber) {
         accountService.deleteAccount(accountNumber);
     }
 }

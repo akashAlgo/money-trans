@@ -1,5 +1,6 @@
 package drop.wiz.money.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionRequest {
 
     @JsonProperty("source_account")
@@ -22,7 +24,4 @@ public class TransactionRequest {
 
     @JsonProperty
     private BigDecimal amount;
-
-    @JsonProperty("conversion_factor")
-    private Double conversionFactor;
 }

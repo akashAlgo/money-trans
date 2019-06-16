@@ -24,7 +24,7 @@ import java.util.Date;
  * @author ar
  * Jun 12, 2019
  */
-@Entity
+@Entity(name = "Account")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,9 +55,10 @@ public class Account implements Serializable {
 	@JsonProperty
 	private Currency currency;
 
-	@Column(name = "balance", columnDefinition = "MONEY")
+	@Column(name = "balance")
 	@JsonProperty
-	private BigDecimal balance;
+	@Builder.Default
+	private BigDecimal balance = BigDecimal.ZERO;
 
 	@Column(name = "user_id")
 	@JsonProperty("user_id")

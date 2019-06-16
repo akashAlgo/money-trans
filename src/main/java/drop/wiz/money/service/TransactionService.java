@@ -25,9 +25,11 @@ public class TransactionService {
 
     ConversionRateService conversionRateService;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountService accountService) {
+    public TransactionService(TransactionRepository transactionRepository, AccountService accountService,
+                              ConversionRateService conversionRateService) {
         this.transactionRepository = transactionRepository;
         this.accountService = accountService;
+        this.conversionRateService = conversionRateService;
     }
 
     public Transaction createTransaction(TransactionRequest transactionRequest) throws TransactionFailedException {
@@ -40,7 +42,8 @@ public class TransactionService {
             throw new TransactionFailedException("Transaction failed because either source or destination account not found");
         }
 
-        Double conversionRate = conversionRateService.getConversionDate(sourceAccount.getCurrency(),
+        Double conversionRate = sourceAccount.getCurrency() == destinationAccount.getCurrency() ? 1 :
+                conversionRateService.getConversionDate(sourceAccount.getCurrency(),
                 destinationAccount.getCurrency());
 
         // Considering the amount to transfer is in source currency, destination amount is calculated based on a conversion rate
@@ -61,7 +64,6 @@ public class TransactionService {
                 .amount(transactionRequest.getAmount())
                 .sourceAccount(sourceAccount)
                 .destinationAccount(destinationAccount)
-                .conversionFactor(conversionRate)
                 .build();
 
 

@@ -32,6 +32,6 @@ public class AccountRepository extends AbstractDAO<Account> {
     }
 
     public void delete(Long id) {
-        currentSession().delete(findById(id));
+        currentSession().delete(findById(id).get());
     }
 }

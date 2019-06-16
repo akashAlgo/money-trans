@@ -24,7 +24,7 @@ import java.util.Date;
  * @author ar
  * Jun 12, 2019
  */
-@Entity(name = "transaction")
+@Entity(name = "Transaction")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,9 +32,9 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "transaction")
 @NamedQueries({@NamedQuery(name = "transaction.bySourceAccNumber",
-		query = "select t from transaction t where t.sourceAccount = :accNumber "),
+		query = "select t from Transaction t where t.sourceAccount.id = :accNumber "),
 		@NamedQuery(name = "transaction.byDestinationAccNumber",
-				query = "select t from transaction t where t.destinationAccount = :accNumber ")})
+				query = "select t from Transaction t where t.destinationAccount.id = :accNumber ")})
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = -3280962249163675763L;
@@ -46,12 +46,12 @@ public class Transaction implements Serializable {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
+	@JoinColumn(name = "source_account", referencedColumnName = "id")
 	@JsonProperty("source_account")
 	private Account sourceAccount;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
+	@JoinColumn(name = "destination_account", referencedColumnName = "id")
 	@JsonProperty("destination_account")
 	private Account destinationAccount;
 

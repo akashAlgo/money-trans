@@ -7,6 +7,7 @@ import drop.wiz.money.db.TransactionRepository;
 import drop.wiz.money.resources.AccountEndpoint;
 import drop.wiz.money.resources.TransactionEndpoint;
 import drop.wiz.money.service.AccountService;
+import drop.wiz.money.service.ConversionRateService;
 import drop.wiz.money.service.TransactionService;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -46,7 +47,9 @@ public class MoneyTransferApplication extends Application<MoneyTransferConfigura
         final AccountRepository accountRepository = new AccountRepository(hibernate.getSessionFactory());
         final TransactionRepository transactionRepository = new TransactionRepository(hibernate.getSessionFactory());
         final AccountService accountService = new AccountService(accountRepository);
-        final TransactionService transactionService = new TransactionService(transactionRepository, accountService);
+        final ConversionRateService conversionRateService = new ConversionRateService();
+        final TransactionService transactionService = new TransactionService(transactionRepository, accountService,
+                conversionRateService);
 
         environment.jersey().register(new AccountEndpoint(accountService));
         environment.jersey().register(new TransactionEndpoint(transactionService));

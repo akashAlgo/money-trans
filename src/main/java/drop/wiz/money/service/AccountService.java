@@ -2,9 +2,12 @@ package drop.wiz.money.service;
 
 import drop.wiz.money.api.AccountRequest;
 import drop.wiz.money.core.Account;
+import drop.wiz.money.core.AccountType;
+import drop.wiz.money.core.Currency;
 import drop.wiz.money.db.AccountRepository;
 import drop.wiz.money.exception.AccountNotFoundException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ public class AccountService {
 
     public Account getAccountById(Long accountId) throws AccountNotFoundException {
         return accountRepository.findById(accountId)
-                .orElseThrow(() -> new AccountNotFoundException(String.format("Account {} not found", accountId)));
+                .orElseThrow(() -> new AccountNotFoundException(String.format("Account %s not found", accountId)));
     }
 
     public List<Account> getAccountsForUser(String userId) {
@@ -30,12 +33,13 @@ public class AccountService {
         return accountRepository.findByUserId(userIdBuilder.toString());
     }
 
-    public Account saveOrUpdate(AccountRequest accountRequest) {
+    public Account save(AccountRequest accountRequest) {
         Account account = Account.builder()
-                .accountType(accountRequest.getAccountType())
-                .currency(accountRequest.getCurrency())
-                .isActive(accountRequest.getIsActive())
+                .accountType(AccountType.valueOf(accountRequest.getAccountType()))
+                .currency(Currency.valueOf(accountRequest.getCurrency()))
+                .isActive(accountRequest.getIsActive() == null ? true : accountRequest.getIsActive())
                 .userId(accountRequest.getUserId())
+                .balance(BigDecimal.valueOf(accountRequest.getBalance() == null ? 0 : accountRequest.getBalance()))
                 .build();
         return accountRepository.saveOrUpdate(account);
     }
