@@ -5,8 +5,8 @@ import lombok.Getter;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
+
 @Getter
 @AllArgsConstructor
 public enum TransferErrorCodes {

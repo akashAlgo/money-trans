@@ -1,12 +1,15 @@
 package drop.wiz.money.db;
 
-import drop.wiz.money.api.AccountRequest;
 import drop.wiz.money.core.Account;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * Author: arastogi
+ */
 
 public class AccountRepository extends AbstractDAO<Account> {
     /**

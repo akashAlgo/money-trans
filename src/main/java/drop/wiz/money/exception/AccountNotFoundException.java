@@ -2,8 +2,8 @@ package drop.wiz.money.exception;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
+
 public class AccountNotFoundException extends Exception {
 
     public AccountNotFoundException() {

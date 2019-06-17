@@ -6,14 +6,16 @@ import drop.wiz.money.core.AccountType;
 import drop.wiz.money.core.Currency;
 import drop.wiz.money.db.AccountRepository;
 import drop.wiz.money.exception.AccountNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
+
+@Slf4j
 public class AccountService {
 
     private AccountRepository accountRepository;
@@ -24,7 +26,10 @@ public class AccountService {
 
     public Account getAccountById(Long accountId) throws AccountNotFoundException {
         return accountRepository.findById(accountId)
-                .orElseThrow(() -> new AccountNotFoundException(String.format("Account %s not found", accountId)));
+                .orElseThrow(() -> {
+                    log.error("Account Not Found");
+                    return new AccountNotFoundException(String.format("Account %s not found", accountId));
+                });
     }
 
     public List<Account> getAccountsForUser(String userId) {
@@ -41,6 +46,7 @@ public class AccountService {
                 .userId(accountRequest.getUserId())
                 .balance(BigDecimal.valueOf(accountRequest.getBalance() == null ? 0 : accountRequest.getBalance()))
                 .build();
+
         return accountRepository.saveOrUpdate(account);
     }
 

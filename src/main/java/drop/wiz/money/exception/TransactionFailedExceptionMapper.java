@@ -7,8 +7,8 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
+
 @Provider
 public class TransactionFailedExceptionMapper implements ExceptionMapper<TransactionFailedException> {
 

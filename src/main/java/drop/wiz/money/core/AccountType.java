@@ -1,12 +1,9 @@
-/**
- * 
- */
 package drop.wiz.money.core;
 
 /**
- * @author ar
- * Jun 12, 2019
+ * Author: arastogi
  */
+
 public enum AccountType {
 
 	SAVINGS,

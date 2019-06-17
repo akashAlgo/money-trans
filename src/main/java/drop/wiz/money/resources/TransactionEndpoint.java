@@ -12,6 +12,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ * Author: arastogi
+ */
+
 @Path("")
 @Slf4j
 public class TransactionEndpoint {
@@ -30,6 +34,7 @@ public class TransactionEndpoint {
     @UnitOfWork
     public Transaction createTransaction(TransactionRequest transactionRequest) throws TransactionFailedException {
 
+        log.info("Request: {}", transactionRequest);
         return transactionService.createTransaction(transactionRequest);
     }
 
@@ -41,6 +46,7 @@ public class TransactionEndpoint {
     public List<Transaction> getTransactionsForAccount(@QueryParam("account_number") Long accountId,
                                                        @QueryParam("only_outgoing") boolean onlySource,
                                                        @QueryParam("only_incoming") boolean onlyDestination) {
+        log.info("Account Id: {} \n Source: {} \n Destination: {}", accountId, onlySource, onlyDestination);
         return transactionService.getTransactionsForAccount(accountId, onlySource, onlyDestination);
     }
 
@@ -50,6 +56,8 @@ public class TransactionEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @UnitOfWork
     public Transaction getTransactionsForId(@PathParam("transaction_id") Long transactionId) throws TransactionNotFoundException {
+
+        log.info("Transaction Id: {}", transactionId);
         return transactionService.getTransactionForId(transactionId);
     }
 

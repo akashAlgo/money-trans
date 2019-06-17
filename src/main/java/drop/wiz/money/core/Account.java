@@ -1,6 +1,3 @@
-/**
- * 
- */
 package drop.wiz.money.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,9 +18,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author ar
- * Jun 12, 2019
+ * Author: arastogi
  */
+
 @Entity(name = "Account")
 @Data
 @NoArgsConstructor

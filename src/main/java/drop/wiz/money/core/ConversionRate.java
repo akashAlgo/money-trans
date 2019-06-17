@@ -4,7 +4,6 @@ import lombok.*;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
 
 @Data

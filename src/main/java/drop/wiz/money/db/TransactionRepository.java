@@ -7,6 +7,10 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Author: arastogi
+ */
+
 public class TransactionRepository extends AbstractDAO<Transaction> {
     /**
      * Creates a new DAO with a given session provider.

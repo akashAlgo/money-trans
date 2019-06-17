@@ -1,15 +1,12 @@
-/**
- * 
- */
 package drop.wiz.money.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author ar
- * Jun 12, 2019
+ * Author: arastogi
  */
+
 @Getter
 @AllArgsConstructor
 public enum Currency {

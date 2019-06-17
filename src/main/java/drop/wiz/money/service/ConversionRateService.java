@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * Author: arastogi
- * Date: 2019-06-15
  */
+
 public class ConversionRateService {
 
     static List<ConversionRate> conversionRates = new ArrayList<>();

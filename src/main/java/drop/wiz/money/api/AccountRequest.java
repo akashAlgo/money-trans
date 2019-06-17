@@ -2,14 +2,14 @@ package drop.wiz.money.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import drop.wiz.money.core.AccountType;
-import drop.wiz.money.core.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+/**
+ * Author: arastogi
+ */
 
 @Data
 @NoArgsConstructor

@@ -7,8 +7,11 @@ import io.dropwizard.db.DataSourceFactory;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Author: arastogi
+ */
+
 public class MoneyTransferConfiguration extends Configuration {
-    // TODO: implement service configuration
     @Valid
     @NotNull
     @JsonProperty("database")

@@ -15,6 +15,10 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+/**
+ * Author: arastogi
+ */
+
 public class MoneyTransferApplication extends Application<MoneyTransferConfiguration> {
 
     public static void main(final String[] args) throws Exception {
