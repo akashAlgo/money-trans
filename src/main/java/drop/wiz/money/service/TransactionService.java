@@ -45,6 +45,7 @@ public class TransactionService {
             throw new TransactionFailedException("Transaction failed because either source or destination account not found");
         }
 
+        // Get conversion rate based on the currencies of source and destination accounts
         Double conversionRate = sourceAccount.getCurrency() == destinationAccount.getCurrency() ? 1 :
                 conversionRateService.getConversionDate(sourceAccount.getCurrency(),
                         destinationAccount.getCurrency());

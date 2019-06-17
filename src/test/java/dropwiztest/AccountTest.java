@@ -6,6 +6,8 @@ import drop.wiz.money.core.AccountType;
 import drop.wiz.money.core.Currency;
 import drop.wiz.money.db.AccountRepository;
 import drop.wiz.money.exception.AccountNotFoundException;
+import drop.wiz.money.exception.InvalidAccountTypeException;
+import drop.wiz.money.exception.InvalidCurrencyCodeException;
 import drop.wiz.money.service.AccountService;
 import org.junit.After;
 import org.junit.Assert;
@@ -76,6 +78,11 @@ public class AccountTest {
 
     }
 
+    /**
+     * This test case tests the getAccountById method
+     *
+     * @throws AccountNotFoundException
+     */
     @Test
     public void testGetAccountById() throws AccountNotFoundException {
 
@@ -83,6 +90,9 @@ public class AccountTest {
         Assert.assertEquals(account, accountService.getAccountById(accountId));
     }
 
+    /**
+     * This test case test the getAccountsForUser method
+     */
     @Test
     public void testGetAccountsForUser() {
 
@@ -92,8 +102,11 @@ public class AccountTest {
         Assert.assertEquals(accountList, accountService.getAccountsForUser(userId));
     }
 
+    /**
+     * This test case tests the saveAccounts method
+     */
     @Test
-    public void testSaveAccount() {
+    public void testSaveAccount() throws InvalidCurrencyCodeException, InvalidAccountTypeException {
 
         Account accountExpected = Account.builder()
                 .accountType(AccountType.valueOf(accountRequest.getAccountType()))

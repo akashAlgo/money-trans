@@ -4,6 +4,7 @@ import drop.wiz.money.core.Account;
 import drop.wiz.money.core.Transaction;
 import drop.wiz.money.db.AccountRepository;
 import drop.wiz.money.db.TransactionRepository;
+import drop.wiz.money.exception.*;
 import drop.wiz.money.resources.AccountEndpoint;
 import drop.wiz.money.resources.TransactionEndpoint;
 import drop.wiz.money.service.AccountService;
@@ -57,6 +58,11 @@ public class MoneyTransferApplication extends Application<MoneyTransferConfigura
 
         environment.jersey().register(new AccountEndpoint(accountService));
         environment.jersey().register(new TransactionEndpoint(transactionService));
+        environment.jersey().register(new AccountNotFoundExceptionMapper());
+        environment.jersey().register(new TransactionFailedExceptionMapper());
+        environment.jersey().register(new TransactionNotFoundExceptionMapper());
+        environment.jersey().register(new InvalidAccountTypeExceptionMapper());
+        environment.jersey().register(new InvalidCurrencyCodeExceptionMapper());
     }
 
 }

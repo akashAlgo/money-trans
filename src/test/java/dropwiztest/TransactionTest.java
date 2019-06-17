@@ -142,6 +142,12 @@ public class TransactionTest {
 
     }
 
+    /**
+     * This test case tests createTransaction method
+     *
+     * @throws AccountNotFoundException
+     * @throws TransactionFailedException
+     */
     @Test
     public void testCreateTransaction() throws AccountNotFoundException, TransactionFailedException {
 
@@ -154,6 +160,11 @@ public class TransactionTest {
         Assert.assertEquals(transactionExpected, transactionActual);
     }
 
+    /**
+     * This test case tests getTransactionsById method
+     *
+     * @throws TransactionNotFoundException
+     */
     @Test
     public void testGetTransactionForId() throws TransactionNotFoundException {
 
@@ -163,6 +174,9 @@ public class TransactionTest {
 
     }
 
+    /**
+     * This test case tests getTransactionsForAccount method
+     */
     @Test
     public void testGetTransactionsForAccount() {
 

@@ -26,7 +26,13 @@ public class TransactionEndpoint {
         this.transactionService = transactionService;
     }
 
-    //create transaction
+    /**
+     * This API creates a new {@link Transaction} based on the provided {@link TransactionRequest}
+     *
+     * @param transactionRequest Transaction Request of the Transaction to be created
+     * @return Transaction created with the provided Transaction Request
+     * @throws TransactionFailedException Exception Thrown if transaction could not be created because of source or destination account
+     */
     @POST
     @Path("/transactions")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -38,6 +44,14 @@ public class TransactionEndpoint {
         return transactionService.createTransaction(transactionRequest);
     }
 
+    /**
+     * This API gets the List of {@link Transaction} with the given Account Number and filter them by Source or Destination flag.
+     *
+     * @param accountId Account Number
+     * @param onlySource To get only Transactions with this Account Number in source
+     * @param onlyDestination To get only Transactions with this Account Number in destination
+     * @return List of transactions
+     */
     @GET
     @Path("/transactions")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -50,6 +64,13 @@ public class TransactionEndpoint {
         return transactionService.getTransactionsForAccount(accountId, onlySource, onlyDestination);
     }
 
+    /**
+     * This API gets the {@link Transaction} with the given Transaction Id. If the transaction Id doesn't exist then it throws Exception.
+     *
+     * @param transactionId Transaction Number
+     * @return Transaction Information
+     * @throws TransactionNotFoundException Exception thrown if transaction number is not found
+     */
     @GET
     @Path("/transactions/{transaction_id}")
     @Consumes(MediaType.APPLICATION_JSON)
